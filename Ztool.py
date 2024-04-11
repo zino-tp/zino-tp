@@ -7,6 +7,7 @@ import smtplib
 import re
 import subprocess
 
+print("___________________________[âš¡ï¸]_______________________________")
 init()
 
 def print_logo():
@@ -29,7 +30,7 @@ def print_logo():
     print("|   4 Ip-Scanning                                                    ")
     print("|   5 Show My IP                                                     ")
     print("|   6 Email method                                                   ")
-    print("|   7 Canarytoken erstellen                                           ")
+    print("|   7 Create URL Canarytoken                                         ")
     print("|____________________________________________________________________")
 
 def send_to_discord(data):
@@ -158,6 +159,8 @@ def print_ip_info(ip_info):
     print(f"Abuse Name: {ip_info.get('abuse', {}).get('name', '')}")
     print(f"Abuse Network: {ip_info.get('abuse', {}).get('network', '')}")
     print(f"Abuse Phone: {ip_info.get('abuse', {}).get('phone', '')}")
+
+print ("________________________________________________________________")
 
 def create_url_canarytoken():
     print("URL-Canarytoken erstellen:")
