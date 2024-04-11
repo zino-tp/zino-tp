@@ -170,7 +170,7 @@ def print_ip_info(ip_info):
 def main():
     init()
     print_logo()
-    choice = input(f"{Fore.GREEN} Wählen Sie eine Option (1/2/3/4/5/6/7): ")
+    choice = input(f"{Fore.GREEN} Choose an option (1/2/3/4/5/6/7): ")
 
     if choice == '1':
         webhook_message()
@@ -188,7 +188,7 @@ def main():
     elif choice == '7':
         create_url_canarytoken()
     else:
-        print(f"{Fore.RED}Neustart")
+        print(f"{Fore.RED}Restart")
 
 if __name__ == "__main__":
     main()
