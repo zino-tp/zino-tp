@@ -5,8 +5,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 import re
+import subprocess
 
-print("___________________________[âš¡ï¸]_______________________________")
 init()
 
 def print_logo():
@@ -29,6 +29,7 @@ def print_logo():
     print("|   4 Ip-Scanning                                                    ")
     print("|   5 Show My IP                                                     ")
     print("|   6 Email method                                                   ")
+    print("|   7 Canarytoken erstellen                                           ")
     print("|____________________________________________________________________")
 
 def send_to_discord(data):
@@ -158,12 +159,17 @@ def print_ip_info(ip_info):
     print(f"Abuse Network: {ip_info.get('abuse', {}).get('network', '')}")
     print(f"Abuse Phone: {ip_info.get('abuse', {}).get('phone', '')}")
 
-print ("________________________________________________________________")
+def create_url_canarytoken():
+    print("URL-Canarytoken erstellen:")
+    email = input("Geben Sie Ihre E-Mail-Adresse ein: ")
+    website = input("Geben Sie die Website-URL ein (z.B. epicgames.com): ")
+    result = subprocess.run(["curl", f"https://canarytokens.org/generate?types=webbug&email={email}&domain={website}"], capture_output=True, text=True)
+    print("Hier ist Ihr URL-Canarytoken: ", result.stdout)
 
 def main():
     print_logo()
 
-    choice = input(f"{Fore.GREEN} Choose an option...â„¹ï¸ (1/2/3/4/5/6): ")
+    choice = input(f"{Fore.GREEN} Choose an option...â„¹ï¸ (1/2/3/4/5/6/7): ")
 
     if choice == '1':
         webhook_message()
@@ -178,6 +184,8 @@ def main():
         show_my_ip()
     elif choice == '6':
         fill_form()
+    elif choice == '7':
+        create_url_canarytoken()
     else:
         print(f"{Fore.RED}restart")
 
