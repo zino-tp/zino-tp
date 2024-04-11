@@ -8,3 +8,11 @@ join discord
 
 https://discord.com/invite/YURDGEPd
 # termux tool
+
+-Webhook spammer
+-webhook Informationen 
+-webhook deleter
+-IP scanning 
+-Show my IP adresse 
+-Email Option 
+-soon
