@@ -16,3 +16,8 @@ https://discord.com/invite/YURDGEPd
 -Show my IP adresse 
 -Email Option 
 -soon
+
+python.py run
+## Termux
+$wget https://github.com/zino-tp/zino-tp/blob/main/Ztool.py
+$python Ztool.py
